@@ -1,0 +1,70 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+div {
+  padding: 1px;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* layout  */
+#container {
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.main {
+  display: flex;
+  flex-grow: 1;
+}
+#col-1 {
+  border: 1px solid green;
+  align-self: stretch;
+}
+#col-2 {
+  flex-grow: 1;
+  border: 1px solid blue;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+#cores {
+  border: 1px solid black;
+}
+#draw {
+  border: 1px solid black;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+footer {
+  border: 1px solid purple;
+  text-align: center;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  background: rgba(0,0,0, 95%);
+  color: white;
+}
+/* link github */
+
+#link-profile{
+    text-decoration: none;
+    color: grey;
+}
+
+#link-profile:hover{
+    color: white;
+    text-decoration: underline;
+}
