@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 
-
 html,
 body {
   height: 100%;
@@ -29,8 +28,9 @@ body {
 #col-1 {
   /*border: 1px solid grey;*/
   align-self: stretch;
-  padding: 5px;
+  padding: 5px 6px 0 6px;
   background-color:  #EEF0F2;
+  width: 100px;
 }
 #col-2 {
   /*border: 2px solid blue;*/
@@ -67,4 +67,28 @@ footer {
 #link-profile:hover{
     color: white;
     text-decoration: underline;
+}
+
+/* tools */
+#tools{
+  border: 1px solid grey;
+  margin-top: 15px;
+  display: flex;
+  flex-flow: column;
+  padding: 2px;
+  
+}
+#tools div{
+  /*border: 1px solid red;*/
+  width: 40px;
+}
+
+#tools img{
+  padding: 5px;
+  display: block;
+  cursor: pointer;
+}
+
+.active{
+  border: 1px solid blue;
 }
