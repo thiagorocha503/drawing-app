@@ -25,70 +25,117 @@ body {
   display: flex;
   flex-grow: 1;
 }
-#col-1 {
-  /*border: 1px solid grey;*/
-  align-self: stretch;
-  padding: 5px 6px 0 6px;
-  background-color:  #EEF0F2;
-  width: 100px;
-}
-#col-2 {
-  /*border: 2px solid blue;*/
-  flex-grow: 1;
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-}
-
-#cores {
-  padding: 5px;
-  background-color:  #EEF0F2;
-}
-#draw {
-  border: 3px inset grey;
-  align-self: stretch;
-  flex-grow: 1;
-}
 
 footer {
-  /*border: 1px solid purple;*/
   text-align: center;
   padding-top: 13px;
   padding-bottom: 13px;
-  background: rgba(0,0,0, 95%);
+  background: rgba(0, 0, 0, 95%);
   color: white;
 }
-/* link github */
-#link-profile{
-    text-decoration: none;
-    color: grey;
+
+#col-1 {
+  align-self: stretch;
+  padding: 5px 6px 0 6px;
+  background-color: #eef0f2;
+  width: 100px;
+  border-right: 2px inset grey;
 }
 
-#link-profile:hover{
-    color: white;
-    text-decoration: underline;
+#col-2 {
+  flex-grow: 1;
+  height: 100%;
+}
+
+#tool-top {
+  background-color: #eef0f2;
+  padding: 2px 2px;
+  border-bottom: 2px inset grey;
+}
+
+/* link github */
+#link-profile {
+  text-decoration: none;
+  color: grey;
+}
+
+#link-profile:hover {
+  color: white;
+  text-decoration: underline;
 }
 
 /* tools */
-#tools{
+#tools {
   border: 1px solid grey;
   margin-top: 15px;
   display: flex;
   flex-flow: column;
   padding: 2px;
-  
 }
-#tools div{
+
+#tools div {
   /*border: 1px solid red;*/
   width: 40px;
 }
 
-#tools img{
+#tools img {
   padding: 5px;
   display: block;
   cursor: pointer;
 }
 
-.active{
+.active {
   border: 1px solid blue;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* Palette */
+
+#palette-container {
+  border: 2px groove rgba(100%, 100%, 100%, 90%);
+  width: 340px;
+}
+
+#palette-content {
+  display: flex;
+}
+
+#palette-col-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px unset white;
+  flex-grow: 1;
+  background-color: white;
+}
+
+.row {
+  display: flex;
+}
+
+.color {
+  border: 2px inset white;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+#primary-color,
+#secondary-color {
+  width: 20px;
+  height: 20px;
+  border: 1px inset grey;
+  float: left;
+}
+
+#primary-color {
+  margin-right: 5px;
+}
+
+#secondary-color {
+  background-color: white;
 }
