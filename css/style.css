@@ -14,7 +14,6 @@ body {
 }
 /* layout  */
 #container {
-  /*border: 1px solid red;*/
   width: 100%;
   height: 100%;
   display: flex;
@@ -37,20 +36,25 @@ footer {
 #col-1 {
   align-self: stretch;
   padding: 5px 6px 0 6px;
-  background-color: #eef0f2;
+  background-color: #f5f6f7;
   width: 100px;
-  border-right: 2px inset grey;
 }
 
 #col-2 {
   flex-grow: 1;
   height: 100%;
+  display: flex;
+  flex-flow: column;
 }
 
 #tool-top {
-  background-color: #eef0f2;
-  padding: 2px 2px;
-  border-bottom: 2px inset grey;
+  background-color: #f5f6f7;
+  padding: 5px 0;
+}
+#draw{
+  border-top: 2px inset grey;
+  border-left: 2px inset grey;
+  flex-grow: 1;
 }
 
 /* link github */
@@ -66,11 +70,11 @@ footer {
 
 /* tools */
 #tools {
-  border: 1px solid grey;
   margin-top: 15px;
   display: flex;
   flex-flow: column;
   padding: 2px;
+  height: 200px;
 }
 
 #tools div {
@@ -85,7 +89,8 @@ footer {
 }
 
 .active {
-  border: 1px solid blue;
+  border: 2px solid #90c8f6;
+  background-color: #c0dcf3;
 }
 
 .clearfix::after {
@@ -94,10 +99,10 @@ footer {
   display: table;
 }
 /* Palette */
-
 #palette-container {
-  border: 2px groove rgba(100%, 100%, 100%, 90%);
-  width: 340px;
+  border: 2px inset #f5f6f7;
+  width: 325px;
+  margin-left: 5px;
 }
 
 #palette-content {
@@ -128,7 +133,7 @@ footer {
 #secondary-color {
   width: 20px;
   height: 20px;
-  border: 1px inset grey;
+  border: 2px outset #f5f6f7;
   float: left;
 }
 
@@ -137,5 +142,33 @@ footer {
 }
 
 #secondary-color {
+  background-color: white;
+}
+
+/* Tool option */
+#tool-options{
+  margin-top: 20px;
+}
+
+/* line option */
+#line-option{
+  border: 2px inset #f5f6f7;
+  margin: 0 auto;
+  width: 70px;
+  list-style: none;
+}
+#line-option li{
+  padding: 9px 6px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.line{
+  background-color: black;
+}
+#line-option li.active-line {
+  background-color: #0078d7;
+}
+#line-option li.active-line .line{
   background-color: white;
 }

@@ -7,12 +7,15 @@ class Paint {
     private color: String = "black";
     private lineWidth: number = 1;
     private colorPalette: HTMLCollection;
+    private lines: HTMLCollection;
 
 
-    public constructor(canvas: HTMLCanvasElement, colorPalette: HTMLCollectionOf<HTMLDivElement>) {
+    public constructor(canvas: HTMLCanvasElement, colorPalette: HTMLCollectionOf<HTMLDivElement>, lines: HTMLCollectionOf<HTMLLIElement>) {
         this.canvas = canvas;
         this.colorPalette = colorPalette;
+        this.lines = lines;
         let context = this.canvas.getContext("2d");
+
         if (context == null) {
             throw "Canvas null";
         }
@@ -34,10 +37,25 @@ class Paint {
                 if (color != null) {
                     self.changeCurrentColor(color);
                 }
-
             });
         }
+        for (let i = 0; i < this.lines.length; i++) {
+            this.lines[i].addEventListener("click", function (evt: Event) {
+                let lineWidth = lines[i].getAttribute("lineWidth");
+                if (lineWidth != null) {
+                    self.changeWithLine(parseInt(lineWidth));
+                }
+                // set selection
+                for (let j = 0; j < lines.length; j++) {
+                    lines[j].classList.remove("active-line")
+                }
+                lines[i].classList.add("active-line");
+            });
+        }
+    }
 
+    public changeWithLine(lineWidth: number) {
+        this.lineWidth = lineWidth;
     }
 
     public changeCurrentColor(color: string) {
@@ -73,6 +91,7 @@ class Paint {
     }
 
 }
+let lines: HTMLCollectionOf<HTMLLIElement> = document.getElementById("line-option")?.children as HTMLCollectionOf<HTMLLIElement>;
 let colorPick = document.getElementsByClassName("color") as HTMLCollectionOf<HTMLDivElement>;
 let canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
-let app = new Paint(canvas, colorPick);
+let app = new Paint(canvas, colorPick, lines);

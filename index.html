@@ -10,22 +10,45 @@
         <div id="container">
             <div class="main"  >
                 <div id="col-1">
-                    <h4 style="text-align: center;">Tools</h4>
-                    <ul id="tools">
+                    <div id="tools">
                         <div>
                             <img class="active" src="img/pencil.png" alt="pencil" srcset="">
                         </div>
-                    </ul>
+                    </div>
+                    <div id="tool-options">
+                        <ul id="line-option">
+                            <li class="active-line" lineWidth="1">
+                                <div class="line" style="height: 1px;">
+                                </div>
+                            </li>
+                            <li lineWidth="2">
+                                <div class="line" style="height: 2px;">
+                                </div>
+                            </li>
+                            <li lineWidth="4">
+                                <div class="line" style="height: 4px;">
+                                </div>
+                            </li>
+                            <li lineWidth="6">
+                                <div class="line" style="height: 6px;">
+                                </div>
+                            </li>
+                            <li lineWidth="8">
+                                <div class="line" style="height: 8px;">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div id="col-2">
-                    <div id="tool-top">                     
+                    <div id="tool-top">
                         <div id="palette-container">
                             <div id="palette-content">
                                 <div id="palette-col-1">
                                     <div id="box">
                                         <div id="primary-color" style="background-color: black;"></div>
-                                        <div id="secondary-color"></div>  
-                                    </div>   
+                                        <div id="secondary-color"></div>
+                                    </div>
                                 </div>
                                 <div id="palette-col-2">
                                     <div class="row">
@@ -58,12 +81,12 @@
                     </div>
                     <div id="draw">
                         <canvas id="canvas" style="border: 1px solid black;" width="800" height="400">
-                        </canvas>             
+                        </canvas>
                     </div>
                 </div>
             </div>
             <footer>
-                <p>Made with <span style="color: red;">❤️</span> by 
+                <p>Made with <span style="color: red;">❤️</span> by
                     <a id="link-profile" href="http://github.com/thiagorocha503" target="_blank" rel="noopener noreferrer">Thiago Rocha</a>
                 </p>
             </footer>
