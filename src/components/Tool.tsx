@@ -1,3 +1,8 @@
+import { palette } from "../constants/palette";
+import Clean from "./Clean";
+import Color from "./Color";
+import LineWidth from "./LineWidth";
+import ColorPicker from "./ColorPicker";
 import "./Tool.css";
 
 type ToolProps = {
@@ -8,7 +13,6 @@ type ToolProps = {
     handleLineWidthChange: (lineWidth: number) => void;
     handleClear: () => void;
 };
-
 export default function Tool({
     color,
     lineWidth,
@@ -19,42 +23,47 @@ export default function Tool({
 }: ToolProps) {
     return (
         <div className={`tool ${slide ? "slide-out" : "slide-in"}`}>
-            <div>
-                <label htmlFor="picker">Color</label>
-                <input
-                    className="picker"
-                    id="picker"
-                    type="color"
-                    value={color}
-                    onChange={(e) => handleColorChange(e.target.value)}
-                    aria-label="pincel color"
-                />
-
-                <label htmlFor="lineWidth">Line width</label>
-                <input
-                    id="lineWidth"
-                    value={lineWidth}
-                    min={1}
-                    max={30}
-                    step={1}
-                    onChange={(e) =>
-                        handleLineWidthChange(parseInt(e.target.value))
-                    }
-                    type="range"
-                    aria-label="pincel line width"
-                />
+            <div
+                style={{
+                    flexGrow: 1,
+                    // border: "1px solid black",
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "stretch",
+                        flexGrow: "1",
+                    }}
+                >
+                    <div style={{display: "flex", alignItems:"center"}}>
+                        <ColorPicker color={color} onClick={handleColorChange} />
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            flexWrap: "wrap",
+                        }}
+                    >
+                        {palette.map((color) => (
+                            <Color onClick={handleColorChange} color={color} />
+                        ))}
+                    </div>
+                </div>
+                <div>
+                    <LineWidth
+                        lineWidth={lineWidth}
+                        onClick={handleLineWidthChange}
+                    />
+                </div>
             </div>
             <div>
-            <input
-                id="clear"
-                type="button"
-                value="clear"
-                onClick={() => handleClear()}
-                aria-label="clean paint"
-            />
+                <Clean onClick={handleClear} />
             </div>
-
-           
         </div>
     );
 }

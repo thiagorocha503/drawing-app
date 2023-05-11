@@ -1,9 +1,9 @@
 :root {
-    --tool-with: 110px;
+    --tool-with: 70px;
     --animation-offset: 0.95
 }
 .tool {
-    padding: 16px 8px;
+    padding:  8px;
     min-height: 400px;
     width: var(--tool-with);
     border-bottom-right-radius: 10px;
@@ -19,19 +19,13 @@
     -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.33);
     box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.33);
 }
-.tool :first-child{
-    flex-grow: 1;
-}
+
 input {
     margin: 8px 0;
-}
-
-#lineWidth,
-#clear,
-#picker {
     width: 100%;
     cursor: pointer;
 }
+
 label{
     text-align: start;
     color: #303030;

@@ -3,8 +3,6 @@ import { useState } from "react";
 import Paint from "./components/Paint";
 import Tool from "./components/Tool";
 
-const toolWidth = 110;
-
 function App() {
     const [lineWidth, setLineWidth] = useState<number>(1);
     const [color, setColor] = useState<string>("#000000");
@@ -16,11 +14,7 @@ function App() {
     useEffect(() => {
         const handle = (e: MouseEvent) => {
             if (drawing) {
-                if (e.clientX <= toolWidth + 50) {
-                    setSlider(true);
-                } else {
-                    setSlider(false);
-                }
+                setSlider(true);
             } else {
                 setSlider(false);
             }

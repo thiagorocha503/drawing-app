@@ -1,0 +1,21 @@
+// https://www.creativecolorschemes.com/products/ccs1/rgbColorGuide.shtml
+export const palette: string[] = [
+    "#B21F35",
+    "#D82735",
+    "#FF7435",
+    "#FFA135",
+    "#FFCB35",
+    "#FFF735",
+    "#00753A",
+    "#009e47",
+    "#16dd36",
+    "#0052a5",
+    "#0079e7",
+    "#06a9fc",
+    "#681e7e",
+    "#7d3cb5",
+    "#bd7af6",
+    "#FF087F",
+    "#686868",
+    "#000",
+];
