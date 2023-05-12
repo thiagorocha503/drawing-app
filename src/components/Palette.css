@@ -1,0 +1,10 @@
+
+.palette {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    translate: 0 -50%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}

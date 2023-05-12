@@ -1,6 +1,4 @@
-import { palette } from "../constants/palette";
 import Clean from "./Clean";
-import Color from "./Color";
 import LineWidth from "./LineWidth";
 import ColorPicker from "./ColorPicker";
 import "./Tool.css";
@@ -8,7 +6,7 @@ import "./Tool.css";
 type ToolProps = {
     color: string;
     lineWidth: number;
-    slide: boolean;
+    hide: boolean;
     handleColorChange: (color: string) => void;
     handleLineWidthChange: (lineWidth: number) => void;
     handleClear: () => void;
@@ -16,17 +14,16 @@ type ToolProps = {
 export default function Tool({
     color,
     lineWidth,
-    slide,
+    hide,
     handleColorChange,
     handleLineWidthChange,
     handleClear,
 }: ToolProps) {
     return (
-        <div className={`tool ${slide ? "slide-out" : "slide-in"}`}>
+        <div className={`tool ${hide ? "tool-out" : "tool-in"}`}>
             <div
                 style={{
                     flexGrow: 1,
-                    // border: "1px solid black",
                     display: "flex",
                     flexDirection: "column",
                 }}
@@ -39,26 +36,18 @@ export default function Tool({
                         flexGrow: "1",
                     }}
                 >
-                    <div style={{display: "flex", alignItems:"center"}}>
-                        <ColorPicker color={color} onClick={handleColorChange} />
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <ColorPicker
+                            color={color}
+                            onClick={handleColorChange}
+                        />
                     </div>
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        {palette.map((color) => (
-                            <Color onClick={handleColorChange} color={color} />
-                        ))}
+                    <div>
+                        <LineWidth
+                            lineWidth={lineWidth}
+                            onClick={handleLineWidthChange}
+                        />
                     </div>
-                </div>
-                <div>
-                    <LineWidth
-                        lineWidth={lineWidth}
-                        onClick={handleLineWidthChange}
-                    />
                 </div>
             </div>
             <div>

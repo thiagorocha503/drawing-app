@@ -32,20 +32,20 @@ label{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.slide-in,
-.slide-out {
+.tool-in,
+.tool-out {
     animation-duration: 0.25s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
 }
-.slide-in {
-    animation-name: slide-in-animation;
+.tool-in {
+    animation-name: slide-in-left-animation;
 }
-.slide-out {
-    animation-name: slide-out-animation;
+.tool-out {
+    animation-name: slide-out-left-animation;
 }
 
-@keyframes slide-in-animation {
+@keyframes slide-in-left-animation {
     from {
         left: calc(-1 * (var(--tool-with) * var(--animation-offset)));
     }
@@ -53,7 +53,7 @@ label{
         left: 0;
     }
 }
-@keyframes slide-out-animation {
+@keyframes slide-out-left-animation {
     from {
         left: 0;
     }

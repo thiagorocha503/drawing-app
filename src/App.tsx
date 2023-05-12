@@ -2,11 +2,12 @@ import { RefObject, useEffect, useRef } from "react";
 import { useState } from "react";
 import Paint from "./components/Paint";
 import Tool from "./components/Tool";
+import Palette from "./components/Palette";
 
 function App() {
     const [lineWidth, setLineWidth] = useState<number>(1);
     const [color, setColor] = useState<string>("#000000");
-    const [slide, setSlider] = useState<boolean>(false);
+    const [hideTools, setHideTools] = useState<boolean>(false);
     const [drawing, setDrawing] = useState<boolean>(false);
     const canvasRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
@@ -14,9 +15,9 @@ function App() {
     useEffect(() => {
         const handle = (e: MouseEvent) => {
             if (drawing) {
-                setSlider(true);
+                setHideTools(true);
             } else {
-                setSlider(false);
+                setHideTools(false);
             }
         };
         window.addEventListener("mousemove", handle);
@@ -44,9 +45,9 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div className="App" style={{border:"1px solid red"}}>
             <Tool
-                slide={slide}
+                hide={hideTools}
                 color={color}
                 lineWidth={lineWidth}
                 handleClear={handleClear}
@@ -60,6 +61,7 @@ function App() {
                 color={color}
                 lineWidth={lineWidth}
             />
+            <Palette  color={color} handleColorChange={handleChangColor}/>
         </div>
     );
 }
