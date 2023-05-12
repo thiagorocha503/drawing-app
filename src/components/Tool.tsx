@@ -1,5 +1,5 @@
 import Clean from "./Clean";
-import LineWidth from "./LineWidth";
+import Size from "./Size";
 import ColorPicker from "./ColorPicker";
 import "./Tool.css";
 
@@ -7,6 +7,8 @@ type ToolProps = {
     color: string;
     lineWidth: number;
     hide: boolean;
+    showSizeContext: boolean;
+    handleShowSizeContext: (value: boolean) => void;
     handleColorChange: (color: string) => void;
     handleLineWidthChange: (lineWidth: number) => void;
     handleClear: () => void;
@@ -15,6 +17,8 @@ export default function Tool({
     color,
     lineWidth,
     hide,
+    showSizeContext,
+    handleShowSizeContext,
     handleColorChange,
     handleLineWidthChange,
     handleClear,
@@ -43,9 +47,11 @@ export default function Tool({
                         />
                     </div>
                     <div>
-                        <LineWidth
-                            lineWidth={lineWidth}
-                            onClick={handleLineWidthChange}
+                        <Size
+                            showSizeContext={showSizeContext}
+                            handleShowSizeContext={handleShowSizeContext}
+                            currentSize={lineWidth}
+                            handleChangeSize={handleLineWidthChange}
                         />
                     </div>
                 </div>

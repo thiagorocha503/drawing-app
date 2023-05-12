@@ -5,17 +5,19 @@ import Tool from "./components/Tool";
 import Palette from "./components/Palette";
 
 function App() {
-    const [lineWidth, setLineWidth] = useState<number>(1);
+    const [lineWidth, setLineWidth] = useState<number>(10);
     const [color, setColor] = useState<string>("#000000");
     const [hideTools, setHideTools] = useState<boolean>(false);
     const [drawing, setDrawing] = useState<boolean>(false);
+    const [showSizeContext, setShowSizeContext] = useState<boolean>(false);
     const canvasRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
-
+   
     useEffect(() => {
         const handle = (e: MouseEvent) => {
             if (drawing) {
                 setHideTools(true);
+                setShowSizeContext(false);
             } else {
                 setHideTools(false);
             }
@@ -44,9 +46,15 @@ function App() {
         context?.clearRect(0, 0, canvas?.width || 0, canvas?.height || 0);
     };
 
+    const handleShowSizeContext = (value: boolean) => {
+        setShowSizeContext(value);
+    };
+
     return (
-        <div className="App" style={{border:"1px solid red"}}>
+        <div className="App" style={{ border: "1px solid red" }}>
             <Tool
+                showSizeContext={showSizeContext}
+                handleShowSizeContext={handleShowSizeContext}
                 hide={hideTools}
                 color={color}
                 lineWidth={lineWidth}
@@ -61,7 +69,7 @@ function App() {
                 color={color}
                 lineWidth={lineWidth}
             />
-            <Palette  color={color} handleColorChange={handleChangColor}/>
+            <Palette color={color} handleColorChange={handleChangColor} />
         </div>
     );
 }

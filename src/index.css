@@ -13,3 +13,8 @@ html {
 #root {
     height: 100%;
 }
+
+
+input, button {
+    cursor: pointer;
+}

@@ -1,0 +1,43 @@
+.size-container {
+    flex-grow: 0;
+    position: relative;
+}
+
+.outter-circle,
+.inner-circle {
+    border-radius: 50%;
+}
+
+.outter-circle {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    border: 2px solid #4f4f4f;
+}
+
+.inner-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202020;
+}
+
+.dialog {
+    border-radius: 5px;
+    padding: 8px;
+    width: 200px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 30px);
+    background-color: #d4d4d4;
+    display: flex;
+    flex-direction: column;
+}
+.dialog :first-child {
+    display: flex;
+    justify-content: space-between;
+}
