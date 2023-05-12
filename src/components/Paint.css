@@ -1,0 +1,11 @@
+
+.canva-wrapper{
+    position: relative;
+}
+canvas {
+    position: absolute;
+}
+.offscreen{
+    z-index: 2;
+    background-color: transparent;
+}

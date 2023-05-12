@@ -1,4 +1,4 @@
-import "./Color.css"
+import "./Color.css";
 
 export default function Color({
     color,
@@ -8,8 +8,10 @@ export default function Color({
     onClick: (color: string) => void;
 }) {
     return (
-        <button className="color"
-            style={{ backgroundColor: color, display:"block" }}
+        <button
+            className="color"
+            type="button"
+            style={{ backgroundColor: color, display: "block" }}
             onClick={() => onClick(color)}
         ></button>
     );

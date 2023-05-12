@@ -1,5 +1,5 @@
 type SizeButtonProps = {
-    currentSize: number;
+   currentSize: number;
     showSizeContext: boolean;
     handleShowSizeContext: (show: boolean) => void;
     handleChangeSize: (value: number) => void;
@@ -16,21 +16,22 @@ export default function SizeButton({
     const w = (100 * currentSize) / maxSize;
 
     return (
-        <div className="size-container">
+        <div style={{ position: "relative" }}>
             <div
                 className="outter-circle"
                 onClick={(e) => {
                     e.preventDefault();
                     setShowSizeContext(!showSizeContext);
                 }}
+                style={{ border: "2px solid #4f4f4f" }}
                 title="size"
-                aria-label="change size"
             >
                 <div
                     className="inner-circle"
                     style={{
                         width: `${w}%`,
                         height: `${w}%`,
+                        background: "background-color: #202020",
                     }}
                 ></div>
             </div>
@@ -44,6 +45,7 @@ export default function SizeButton({
                 </div>
                 <div>
                     <input
+                        style={{ width: "100%" }}
                         id="lineWidth"
                         value={currentSize}
                         min={minSize}
@@ -61,17 +63,3 @@ export default function SizeButton({
         </div>
     );
 }
-/*
-
- <input
-            id="lineWidth"
-            value={size}
-            min={1}
-            max={30}
-            step={1}
-            onChange={(e) => onClick(parseFloat(e.target.value))}
-            type="range"
-            aria-label="pincel line width"
-            title="line width"
-        />
-*/

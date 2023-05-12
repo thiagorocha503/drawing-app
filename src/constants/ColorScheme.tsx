@@ -17,5 +17,5 @@ export const ColorSchemes: string[] = [
     "#bd7af6",
     "#FF087F",
     "#686868",
-    "#000",
+    "#000000",
 ];

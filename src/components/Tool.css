@@ -2,6 +2,7 @@
     --tool-with: 70px;
     --animation-offset: 0.95
 }
+
 .tool {
     padding:  8px;
     min-height: 400px;
@@ -12,18 +13,13 @@
     position: absolute;
     top: 50%;
     left: 0;
+    z-index: 5;
     transform: translate(0, -50%);
     display: flex;
     flex-direction: column;
     align-items: stretch;
     -webkit-box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.33);
     box-shadow: 5px 6px 8px -4px rgba(0, 0, 0, 0.33);
-}
-
-input {
-    margin: 8px 0;
-    width: 100%;
-    cursor: pointer;
 }
 
 label{

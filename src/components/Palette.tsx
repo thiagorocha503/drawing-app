@@ -8,7 +8,7 @@ type PaletteProps = {
 };
 export default function Palette({color, handleColorChange }: PaletteProps) {
     return (
-        <div className={`palette `}>
+        <div className={`palette `} >
             {ColorSchemes.map((c) => (
                 <Color key={c} onClick={handleColorChange} color={c} />
             ))}

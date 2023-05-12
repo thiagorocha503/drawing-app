@@ -1,39 +1,23 @@
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject,  useRef } from "react";
 import { useState } from "react";
 import Paint from "./components/Paint";
 import Tool from "./components/Tool";
 import Palette from "./components/Palette";
 
 function App() {
-    const [lineWidth, setLineWidth] = useState<number>(10);
+    const [opacity, setOpacity] = useState<number>(100);
+    const [size, setSize] = useState<number>(10);
     const [color, setColor] = useState<string>("#000000");
-    const [hideTools, setHideTools] = useState<boolean>(false);
     const [drawing, setDrawing] = useState<boolean>(false);
-    const [showSizeContext, setShowSizeContext] = useState<boolean>(false);
     const canvasRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
-   
-    useEffect(() => {
-        const handle = (e: MouseEvent) => {
-            if (drawing) {
-                setHideTools(true);
-                setShowSizeContext(false);
-            } else {
-                setHideTools(false);
-            }
-        };
-        window.addEventListener("mousemove", handle);
-        return () => {
-            return window.removeEventListener("mousemove", handle);
-        };
-    });
 
-    const handleChangColor = (color: string) => {
+    const handleChangeColor = (color: string) => {
         setColor(color);
     };
 
     const handleLineWidthChange = (line: number) => {
-        setLineWidth(line);
+        setSize(line);
     };
 
     const handleDrawing = (value: boolean) => {
@@ -46,30 +30,30 @@ function App() {
         context?.clearRect(0, 0, canvas?.width || 0, canvas?.height || 0);
     };
 
-    const handleShowSizeContext = (value: boolean) => {
-        setShowSizeContext(value);
+    const handleChangeOpacity = (value: number) => {
+        setOpacity(value);
     };
-
     return (
-        <div className="App" style={{ border: "1px solid red" }}>
+        <div className="App" >
             <Tool
-                showSizeContext={showSizeContext}
-                handleShowSizeContext={handleShowSizeContext}
-                hide={hideTools}
+                opacity={opacity}
+                drawing={drawing}
                 color={color}
-                lineWidth={lineWidth}
+                size={size}
+                handleChangeOpacity={handleChangeOpacity}
                 handleClear={handleClear}
-                handleColorChange={handleChangColor}
-                handleLineWidthChange={handleLineWidthChange}
+                handleColorChange={handleChangeColor}
+                handleSizeChange={handleLineWidthChange}
             />
             <Paint
+                opacity={opacity}
                 canvasRef={canvasRef}
                 drawing={drawing}
                 handleDrawing={handleDrawing}
                 color={color}
-                lineWidth={lineWidth}
+                lineWidth={size}
             />
-            <Palette color={color} handleColorChange={handleChangColor} />
+            <Palette color={color} handleColorChange={handleChangeColor} />
         </div>
     );
 }
