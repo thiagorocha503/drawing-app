@@ -1,7 +1,4 @@
-
-
 type OpacityButtonProps = {
- 
     opacity: number;
     showOpacityContext: boolean;
     handleOpacityContext: (v: boolean) => void;

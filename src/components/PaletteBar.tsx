@@ -1,12 +1,12 @@
 import { ColorSchemes } from "../constants/ColorScheme";
 import Color from "./Color";
-import "./Palette.css"
+import "./PaletteBar.css"
 
-type PaletteProps = {
+type PaletteToolbarProps = {
     color: string;
     handleColorChange: (color: string) => void;
 };
-export default function Palette({color, handleColorChange }: PaletteProps) {
+export default function PaletteToolbar({color, handleColorChange }: PaletteToolbarProps) {
     return (
         <div className={`palette `} >
             {ColorSchemes.map((c) => (

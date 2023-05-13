@@ -1,8 +1,8 @@
 import { RefObject,  useRef } from "react";
 import { useState } from "react";
 import Paint from "./components/Paint";
-import Tool from "./components/Tool";
-import Palette from "./components/Palette";
+import MainToolbar from "./components/Toolbar";
+import PaletteToolbar from "./components/PaletteBar";
 
 function App() {
     const [opacity, setOpacity] = useState<number>(100);
@@ -35,7 +35,7 @@ function App() {
     };
     return (
         <div className="App" >
-            <Tool
+            <MainToolbar
                 opacity={opacity}
                 drawing={drawing}
                 color={color}
@@ -53,7 +53,7 @@ function App() {
                 color={color}
                 lineWidth={size}
             />
-            <Palette color={color} handleColorChange={handleChangeColor} />
+            <PaletteToolbar color={color} handleColorChange={handleChangeColor} />
         </div>
     );
 }
