@@ -1,17 +1,22 @@
-import { RefObject,  useRef } from "react";
+import { RefObject, useRef, useEffect } from "react";
 import { useState } from "react";
-import Paint from "./components/Paint";
+import Canvas from "./components/Canvas";
 import MainToolbar from "./components/Toolbar";
 import PaletteToolbar from "./components/PaletteBar";
+import { brushMode } from "./types/toolMode";
 
 function App() {
     const [opacity, setOpacity] = useState<number>(100);
+    const [mode, setMode] = useState<brushMode>(brushMode.Paint);
     const [size, setSize] = useState<number>(10);
     const [color, setColor] = useState<string>("#000000");
     const [drawing, setDrawing] = useState<boolean>(false);
     const canvasRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
 
+    useEffect(() => {
+        console.log(mode);
+    }, [mode]);
     const handleChangeColor = (color: string) => {
         setColor(color);
     };
@@ -33,19 +38,26 @@ function App() {
     const handleChangeOpacity = (value: number) => {
         setOpacity(value);
     };
+
+    const handleChangeMode = (mode: brushMode) => {
+        setMode(mode);
+    };
     return (
-        <div className="App" >
+        <div className="App">
             <MainToolbar
+                mode={mode}
                 opacity={opacity}
                 drawing={drawing}
                 color={color}
                 size={size}
+                handleChangeMode={handleChangeMode}
                 handleChangeOpacity={handleChangeOpacity}
                 handleClear={handleClear}
                 handleColorChange={handleChangeColor}
                 handleSizeChange={handleLineWidthChange}
             />
-            <Paint
+            <Canvas
+                mode={mode}
                 opacity={opacity}
                 canvasRef={canvasRef}
                 drawing={drawing}
@@ -53,7 +65,10 @@ function App() {
                 color={color}
                 lineWidth={size}
             />
-            <PaletteToolbar color={color} handleColorChange={handleChangeColor} />
+            <PaletteToolbar
+                color={color}
+                handleColorChange={handleChangeColor}
+            />
         </div>
     );
 }

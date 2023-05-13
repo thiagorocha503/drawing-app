@@ -1,112 +1,20 @@
-import { RefObject, MouseEvent, useState, useRef } from "react";
-import { rgbToDec } from "../util/convertion";
-import { Position } from "../types/position";
-import "./Paint.css";
-
-type PaintProps = {
-    opacity: number;
-    drawing: boolean;
-    color: string;
-    lineWidth: number;
-    canvasRef: RefObject<HTMLCanvasElement>;
-    handleDrawing: (b: boolean) => void;
-};
-
-const lineCap: "butt" | "round" | "square" = "round";
-const lineJoin: "bevel" | "miter" | "round" = "round";
-export default function Paint({
-    opacity,
-    color,
-    lineWidth,
-    drawing,
-    handleDrawing,
-    canvasRef: paperRef,
-}: PaintProps) {
-    const offScreenRef: RefObject<HTMLCanvasElement> =
-        useRef<HTMLCanvasElement>(null);
-    const [paths, setPaths] = useState<Position[]>([]);
-
-    const handleMouseDown = (evt: MouseEvent) => {
-        const canvas = offScreenRef.current as HTMLCanvasElement;
-        const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-        ctx?.beginPath();
-        const { red, green, blue } = rgbToDec(color);
-        ctx.strokeStyle = `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`;
-        ctx.lineCap = lineCap;
-        ctx.lineJoin = lineJoin;
-        ctx.lineWidth = lineWidth;
-        const { x, y } = currentPosition(evt);
-        ctx?.moveTo(x, y);
-        setPaths((paths) => [...paths, { x, y }]);
-        handleDrawing(true);
-    };
-
-    const currentPosition = (evt: MouseEvent): Position => {
-        return {
-            x: evt.clientX - offScreenRef.current!.offsetLeft,
-            y: evt.clientY - offScreenRef.current!.offsetTop,
-        };
-    };
-
-    const handleMouseMove = (evt: MouseEvent) => {
-        const canvas = offScreenRef.current as HTMLCanvasElement;
-        const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-        if (drawing) {
-            clean();
-            const { x, y } = currentPosition(evt);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-            setPaths((paths) => [...paths, { x, y }]);
-        }
-    };
-
-    const draw = (canvas: HTMLCanvasElement) => {
-        if (paths.length === 1) {
-            return;
-        }
-        const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-        const { red, green, blue } = rgbToDec(color);
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`;
-        ctx.lineCap = lineCap;
-        ctx.lineJoin = lineJoin;
-        ctx.lineWidth = lineWidth;
-        for (let i = 0; i < paths.length; i++) {
-            ctx.lineTo(paths[i].x, paths[i].y);
-            ctx.moveTo(paths[i].x, paths[i].y);
-        }
-        ctx.stroke();
-    };
-
-    const clean = () => {
-        const canvas = offScreenRef.current as HTMLCanvasElement;
-        const ctx = canvas!.getContext("2d") as CanvasRenderingContext2D;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    };
-
-    const handleMouseUp = (_: MouseEvent) => {
-        draw(paperRef.current as HTMLCanvasElement);
-        clean();
-        handleDrawing(false);
-        setPaths([]);
-    };
-
+export default function Pencil({
+    onClick,
+    active,
+}: {
+    active: boolean;
+    onClick: () => void;
+}) {
     return (
-        <div className="canva-wrapper">
-            <canvas
-                className="offscreen"
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                width={window.innerWidth}
-                height={window.innerHeight}
-                ref={offScreenRef}
-            ></canvas>
-            <canvas
-                width={window.innerWidth}
-                height={window.innerHeight}
-                ref={paperRef}
-            ></canvas>
-        </div>
+        <button title="paint"  type="button" className="brush-tool" onClick={() => onClick()}>
+            <svg
+                width={30}
+                fill={active ? "black" : "grey"}
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path d="m167.02 309.34c-40.12 2.58-76.53 17.86-97.19 72.3-2.35 6.21-8 9.98-14.59 9.98-11.11 0-45.46-27.67-55.25-34.35.01 82.35 37.94 154.73 128.01 154.73 75.86 0 128-43.77 128-120.19 0-3.11-.65-6.08-.97-9.13zm290.87-309.34c-15.16 0-29.37 6.71-40.21 16.45-204.41 182.6-225.68 186.89-225.68 240.64 0 13.7 3.25 26.76 8.73 38.7l63.82 53.18c7.21 1.8 14.64 3.03 22.39 3.03 62.11 0 98.11-45.47 211.16-256.46 7.38-14.35 13.9-29.85 13.9-45.99 0-28.91-26-49.55-54.11-49.55z" />
+            </svg>
+        </button>
     );
 }
