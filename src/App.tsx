@@ -4,6 +4,7 @@ import Canvas from "./components/Canvas";
 import MainToolbar from "./components/Toolbar";
 import PaletteToolbar from "./components/PaletteBar";
 import { brushMode } from "./types/toolMode";
+import Clean from "./components/Clean";
 
 function App() {
     const [opacity, setOpacity] = useState<number>(100);
@@ -44,6 +45,7 @@ function App() {
     };
     return (
         <div className="App">
+            <Clean drawing={drawing} onClick={handleClear} />
             <MainToolbar
                 mode={mode}
                 opacity={opacity}

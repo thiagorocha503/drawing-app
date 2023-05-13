@@ -56,66 +56,43 @@ export default function MainToolbar({
 
     return (
         <div className={`tool ${drawing ? "tool-out" : "tool-in"}`}>
-            <div
-                style={{
-                    flexGrow: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "stretch",
-                        flexGrow: "1",
-                    }}
-                >
-                    <div>
-                        <Paint
-                            active={mode === brushMode.Paint}
-                            onClick={() => handleChangeMode(brushMode.Paint)}
-                        />
-                    </div>
-                    <div>
-                        <Eraser
-                            active={mode === brushMode.Eraser}
-                            onClick={() => handleChangeMode(brushMode.Eraser)}
-                        />
-                    </div>
-
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            paddingBottom: "8px",
-                        }}
-                    >
-                        <ColorPicker
-                            color={color}
-                            onClick={handleColorChange}
-                        />
-                    </div>
-                    <div style={{ paddingBottom: "8px" }}>
-                        <SizeButton
-                            showSizeContext={showSizeContext}
-                            handleShowSizeContext={handleShowSizeContext}
-                            currentSize={size}
-                            handleChangeSize={handleSizeChange}
-                        />
-                    </div>
-                    <div style={{ paddingBottom: "8px" }}>
-                        <OpacityButton
-                            showOpacityContext={showOpacityContext}
-                            handleOpacityChange={handleChangeOpacity}
-                            handleOpacityContext={handleOpacityContext}
-                            opacity={opacity}
-                        />
-                    </div>
-                </div>
+            <div>
+                <Paint
+                    active={mode === brushMode.Paint}
+                    onClick={() => handleChangeMode(brushMode.Paint)}
+                />
             </div>
             <div>
-                <Clean onClick={handleClear} />
+                <Eraser
+                    active={mode === brushMode.Eraser}
+                    onClick={() => handleChangeMode(brushMode.Eraser)}
+                />
+            </div>
+
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    paddingBottom: "8px",
+                }}
+            >
+                <ColorPicker color={color} onClick={handleColorChange} />
+            </div>
+            <div style={{ paddingBottom: "8px" }}>
+                <SizeButton
+                    showSizeContext={showSizeContext}
+                    handleShowSizeContext={handleShowSizeContext}
+                    currentSize={size}
+                    handleChangeSize={handleSizeChange}
+                />
+            </div>
+            <div style={{ paddingBottom: "8px" }}>
+                <OpacityButton
+                    showOpacityContext={showOpacityContext}
+                    handleOpacityChange={handleChangeOpacity}
+                    handleOpacityContext={handleOpacityContext}
+                    opacity={opacity}
+                />
             </div>
         </div>
     );

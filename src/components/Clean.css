@@ -1,0 +1,14 @@
+.clean {
+    position: absolute;
+    height: 50px;
+    width: 60px;
+    padding: 0;
+    top: 4px;
+    border: none;
+    z-index: 5;
+    background-color: transparent;
+    transition: all 0.5s;
+}
+.clean:hover {
+    scale: 1.2;
+}

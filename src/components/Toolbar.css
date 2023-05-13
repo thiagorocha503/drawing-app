@@ -5,7 +5,6 @@
 
 .tool {
     padding:  8px;
-    min-height: 400px;
     width: var(--tool-with);
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
