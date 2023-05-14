@@ -6,7 +6,7 @@ type PaletteToolbarProps = {
     color: string;
     handleColorChange: (color: string) => void;
 };
-export default function PaletteToolbar({color, handleColorChange }: PaletteToolbarProps) {
+export default function Palettebar({color, handleColorChange }: PaletteToolbarProps) {
     return (
         <div className={`palette `} >
             {ColorSchemes.map((c) => (

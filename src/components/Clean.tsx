@@ -1,12 +1,20 @@
 import { useState } from "react";
 import "./Clean.css";
-type CleanProps = { onClick: () => void; drawing: boolean };
+import { Shapes } from "../types/shapes";
+type CleanProps = {
+    onClick: () => void;
+    drawing: boolean;
+    histories: Shapes[];
+};
 
-export default function Clean({ onClick, drawing }: CleanProps) {
+export default function Clean({ onClick, drawing, histories }: CleanProps) {
     const [color, setColor] = useState("gray");
     return (
         <button
-            className={"clean " + (drawing ? "hide" : "show")}
+            className={
+                "clean " +
+                (drawing ? "hide" : histories.length === 0 ? "hide" : "show")
+            }
             onClick={() => onClick()}
             type="button"
             aria-label="clean paint"

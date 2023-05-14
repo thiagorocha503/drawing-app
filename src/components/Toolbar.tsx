@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import Clean from "./Clean";
 import SizeButton from "./SizeButton";
-
 import ColorPicker from "./ColorPicker";
 import "./Toolbar.css";
 import OpacityButton from "./OpacityButton";

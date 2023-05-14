@@ -68,6 +68,20 @@ button {
     height: 40px;
 }
 
+.redo,
+.undo {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    transition: all 0.25s;
+    cursor: pointer;
+    z-index: 5;
+}
+.redo:hover,
+.undo:hover {
+    scale: 1.2;
+}
+
 .show,
 .hide {
     animation-duration: 0.25s;
