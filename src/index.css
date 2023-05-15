@@ -69,7 +69,8 @@ button {
 }
 
 .redo,
-.undo {
+.undo,
+.download {
     position: absolute;
     border: none;
     background-color: transparent;
@@ -78,7 +79,8 @@ button {
     z-index: 5;
 }
 .redo:hover,
-.undo:hover {
+.undo:hover,
+.download:hover {
     scale: 1.2;
 }
 
@@ -90,10 +92,12 @@ button {
 
 .hide {
     animation-name: hide-animation;
+    display: none;
 }
 
 .show {
     animation-name: show-animation;
+    display: block;
 }
 
 @keyframes show-animation {

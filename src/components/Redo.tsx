@@ -17,7 +17,7 @@ export default function Redo({
         <button
             onClick={() => handleRedo()}
             onMouseOut={() => setColor("grey")}
-            onMouseEnter={() => setColor("black")}
+            onMouseOver={() => setColor("black")}
             title="redo"
             className={
                 "redo " +

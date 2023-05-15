@@ -14,7 +14,7 @@ export default function Undo({
     return (
         <button
             onMouseOut={() => setColor("grey")}
-            onMouseEnter={() => setColor("black")}
+            onMouseOver={() => setColor("black")}
             onClick={() => handleUndo()}
             title="undo"
             className={
