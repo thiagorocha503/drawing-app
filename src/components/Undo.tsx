@@ -16,7 +16,7 @@ export default function Undo({
             onMouseOut={() => setColor("grey")}
             onMouseOver={() => setColor("black")}
             onClick={() => handleUndo()}
-            title="undo"
+            title="Undo (Ctrl+Z)"
             className={
                 "undo " +
                 (!drawing && currentHistory - 1 >= -1 ? "show" : "hide")

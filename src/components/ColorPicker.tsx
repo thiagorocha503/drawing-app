@@ -13,7 +13,7 @@ export default function ColorPicker({ color, onClick }: ColorPickerProps) {
             value={color}
             onChange={(e) => onClick(e.target.value)}
             aria-label="pincel color"
-            title="color"
+            title="Color"
         />
     );
 }

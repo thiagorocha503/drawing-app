@@ -6,7 +6,7 @@ export default function Pencil({
     onClick: () => void;
 }) {
     return (
-        <button title="paint"  type="button" className="brush-tool" onClick={() => onClick()}>
+        <button title="Paint (B)"  type="button" className="brush-tool" onClick={() => onClick()}>
             <svg
                 width={30}
                 fill={active ? "black" : "grey"}

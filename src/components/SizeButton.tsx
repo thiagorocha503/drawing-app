@@ -1,20 +1,18 @@
+import { MAX_BRUSH_SIZE, MIN_BRUSH_SIZE, STEP_BRUSH } from "../constants/input";
+
 type SizeButtonProps = {
-   currentSize: number;
+    currentSize: number;
     showSizeContext: boolean;
     handleShowSizeContext: (show: boolean) => void;
     handleChangeSize: (value: number) => void;
 };
-const maxSize: number = 40;
-const minSize: number = 1;
-const step: number = 0.5;
 export default function SizeButton({
     showSizeContext,
     currentSize,
     handleChangeSize,
     handleShowSizeContext: setShowSizeContext,
 }: SizeButtonProps) {
-    const w = (100 * currentSize) / maxSize;
-
+    const w = (100 * currentSize) / MAX_BRUSH_SIZE;
     return (
         <div style={{ position: "relative" }}>
             <div
@@ -24,7 +22,7 @@ export default function SizeButton({
                     setShowSizeContext(!showSizeContext);
                 }}
                 style={{ border: "2px solid #4f4f4f" }}
-                title="size"
+                title="Size"
             >
                 <div
                     className="inner-circle"
@@ -48,9 +46,9 @@ export default function SizeButton({
                         style={{ width: "100%" }}
                         id="lineWidth"
                         value={currentSize}
-                        min={minSize}
-                        max={maxSize}
-                        step={step}
+                        min={MIN_BRUSH_SIZE}
+                        max={MAX_BRUSH_SIZE}
+                        step={STEP_BRUSH}
                         onChange={(e) =>
                             handleChangeSize(parseFloat(e.target.value))
                         }

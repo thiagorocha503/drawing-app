@@ -18,7 +18,7 @@ export default function OpacityButton({
             style={{
                 position: "relative",
             }}
-            title="opacity"
+            title="Opacity"
         >
             <div
                 className="outter-circle"

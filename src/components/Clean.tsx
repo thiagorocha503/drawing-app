@@ -18,7 +18,7 @@ export default function Clean({ onClick, drawing, histories }: CleanProps) {
             onClick={() => onClick()}
             type="button"
             aria-label="clean paint"
-            title="clean"
+            title="Clean (Delete)"
             onMouseOver={() => setColor("black")}
             onMouseLeave={() => setColor("grey")}
         >

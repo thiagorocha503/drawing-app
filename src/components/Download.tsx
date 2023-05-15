@@ -1,18 +1,22 @@
 import { useState } from "react";
 import "./Download.css";
+import { RefObject } from "react";
 import { Shapes } from "../types/shapes";
 
 export default function Download({
     canvas,
     histories,
+    downloadRef: ref,
 }: {
     canvas: HTMLCanvasElement | null;
     histories: Shapes[];
+    downloadRef: RefObject<HTMLAnchorElement>;
 }) {
     const [color, setColor] = useState("gray");
     return (
         <a
-            title="download"
+            ref={ref}
+            title="Download (Ctrl+S)"
             href={canvas?.toDataURL("image/png")}
             className={`download  ${histories.length > 0 ? "show" : "hide"}`}
             onMouseOut={() => setColor("grey")}

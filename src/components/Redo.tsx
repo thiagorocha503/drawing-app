@@ -18,7 +18,7 @@ export default function Redo({
             onClick={() => handleRedo()}
             onMouseOut={() => setColor("grey")}
             onMouseOver={() => setColor("black")}
-            title="redo"
+            title="Redo (Ctrl+Shift+Z)"
             className={
                 "redo " +
                 (!drawing && currentHistory + 1 < histories.length

@@ -6,7 +6,7 @@ export default function Eraser({
     onClick: () => void;
 }) {
     return (
-        <button title="eraser" type="button" onClick={() => onClick()} className="eraser-tool">
+        <button title="Eraser (E)" type="button" onClick={() => onClick()} className="eraser-tool">
             <svg
                 width={30}
                 fill={active ? "black" : "grey"}
