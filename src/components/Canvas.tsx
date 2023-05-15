@@ -44,22 +44,26 @@ export default function Canvas({
     const offScreenRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
     const [paths, setPaths] = useState<Position[]>([]);
+
     const handleMouseDown = (evt: MouseEvent) => {
         const canvas = offScreenRef.current as HTMLCanvasElement;
-        const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-        ctx?.beginPath();
-        const { red, green, blue } = rgbToDec(color);
-        ctx.strokeStyle =
-            mode === brushMode.Paint
-                ? `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`
-                : "white";
-        ctx.lineCap = lineCap;
-        ctx.lineJoin = lineJoin;
-        ctx.lineWidth = lineWidth;
-        const { x, y } = currentPosition(evt);
-        ctx?.moveTo(x, y);
-        setPaths((paths) => [...paths, { x, y }]);
-        handleDrawing(true);
+
+        if (mode === brushMode.Paint || mode === brushMode.Eraser) {
+            const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+            ctx?.beginPath();
+            const { red, green, blue } = rgbToDec(color);
+            ctx.strokeStyle =
+                mode === brushMode.Paint
+                    ? `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`
+                    : "white";
+            ctx.lineCap = lineCap;
+            ctx.lineJoin = lineJoin;
+            ctx.lineWidth = lineWidth;
+            const { x, y } = currentPosition(evt);
+            ctx?.moveTo(x, y);
+            setPaths((paths) => [...paths, { x, y }]);
+            handleDrawing(true);
+        }
     };
 
     const currentPosition = (evt: MouseEvent): Position => {
@@ -111,12 +115,18 @@ export default function Canvas({
     };
 
     const handleMouseUp = (_: MouseEvent) => {
-        drawLine(paperRef.current?.getContext("2d")!);
-        // save state
-        // paint or eraser
-
+        // path only begin
+        if (paths.length===1) {        
+            clean();
+            handleDrawing(false);
+            setPaths([]);
+            return;
+        }
         let new_shapes: Shapes | null = null;
         if (mode === brushMode.Paint || mode === brushMode.Eraser) {
+            // draw line
+            drawLine(paperRef.current?.getContext("2d")!);
+            // shapes history
             const { red, green, blue } = rgbToDec(color);
             const style: LineStyle = {
                 lineCap: "round",
@@ -129,6 +139,7 @@ export default function Canvas({
             };
             new_shapes = new LineDraw(paths, style);
         }
+        // save shapes
         if (new_shapes != null) {
             setHistories((current_list) => {
                 // if current history index not equal  histories lenght -1, remove different
