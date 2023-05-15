@@ -8,6 +8,7 @@ import Clean from "./components/Clean";
 import Undo from "./components/Undo";
 import Redo from "./components/Redo";
 import { Shapes, LineDraw } from "./types/shapes";
+import Download from "./components/Download";
 
 function App() {
     const [opacity, setOpacity] = useState<number>(100);
@@ -137,6 +138,7 @@ function App() {
                 drawing={drawing}
                 histories={histories}
             />
+            <Download  canvas={canvasRef.current} histories={histories} />
         </div>
     );
 }
