@@ -1,17 +1,17 @@
+import { settings } from "../types/settings";
+import OpacityMenu from "./OpacityMenu";
+
 type OpacityButtonProps = {
     opacity: number;
-    showOpacityContext: boolean;
-    handleOpacityContext: (v: boolean) => void;
+    showMenu: boolean;
+    handleClickSetting: (s: settings) => void;
     handleOpacityChange: (v: number) => void;
 };
-const minOpacity = 1;
-const maxOpacity = 100;
-const step = 1.5;
 export default function OpacityButton({
     opacity,
-    handleOpacityContext,
+    showMenu: showOpacityMenu,
     handleOpacityChange,
-    showOpacityContext,
+    handleClickSetting,
 }: OpacityButtonProps) {
     return (
         <div
@@ -23,7 +23,7 @@ export default function OpacityButton({
             <div
                 className="outter-circle"
                 style={{ backgroundColor: "#D3D3D3" }}
-                onClick={() => handleOpacityContext(!showOpacityContext)}
+                onClick={() => handleClickSetting(settings.opacity)}
             >
                 <div
                     className="inner-circle"
@@ -35,31 +35,12 @@ export default function OpacityButton({
                     }}
                 ></div>
             </div>
-            <div
-                className="dialog"
-                style={{ display: showOpacityContext ? "block" : "none" }}
-            >
-                <div>
-                    <label htmlFor="opacity">Opacity</label>
-                    <span>{opacity}%</span>
-                </div>
-                <div>
-                    <input
-                        id="opacity"
-                        style={{ width: "100%" }}
-                        value={opacity}
-                        min={minOpacity}
-                        max={maxOpacity}
-                        step={step}
-                        onChange={(e) =>
-                            handleOpacityChange(parseFloat(e.target.value))
-                        }
-                        type="range"
-                        aria-label="opacity"
-                        title="opacity"
-                    />
-                </div>
-            </div>
+            {showOpacityMenu && (
+                <OpacityMenu
+                    handleOpacityChange={handleOpacityChange}
+                    opacity={opacity}
+                />
+            )}
         </div>
     );
 }

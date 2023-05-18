@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useRef } from "react";
 import { useState } from "react";
 import Canvas from "./components/Canvas";
-import MainToolbar from "./components/Toolbar";
+import Toolbar from "./components/Toolbar";
 import Palettebar from "./components/PaletteBar";
 import { tool } from "./types/tool";
 import Clean from "./components/Clean";
@@ -141,7 +141,6 @@ function App() {
     };
 
     const handleLineWidthChange = (line: number) => {
-        console.log(line);
         if (mode === tool.Paint) {
             setBrushSize(line);
         }
@@ -227,7 +226,7 @@ function App() {
                 drawing={drawing}
                 onClick={handleClear}
             />
-            <MainToolbar
+            <Toolbar
                 mode={mode}
                 opacity={opacity}
                 drawing={drawing}

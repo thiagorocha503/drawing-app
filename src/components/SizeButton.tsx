@@ -1,25 +1,24 @@
 import {
     MAX_BRUSH_SIZE,
     MAX_ERASER_SIZE,
-    MIN_BRUSH_SIZE,
-    MIN_ERASER_SIZE,
-    STEP_BRUSH,
 } from "../constants/input";
+import { settings } from "../types/settings";
 import { tool } from "../types/tool";
+import SizeMenu from "./SizeMenu";
 
 type SizeButtonProps = {
     mode: tool;
     currentSize: number;
-    showSizeContext: boolean;
-    handleShowSizeContext: (show: boolean) => void;
+    showMenu: boolean;
+    handleClickSetting: (s: settings) => void;
     handleChangeSize: (value: number) => void;
 };
 export default function SizeButton({
     mode,
-    showSizeContext,
+    showMenu: showSizeMenu,
     currentSize,
     handleChangeSize,
-    handleShowSizeContext: setShowSizeContext,
+    handleClickSetting,
 }: SizeButtonProps) {
     const w =
         (85 * currentSize) /
@@ -30,7 +29,7 @@ export default function SizeButton({
                 className="outter-circle"
                 onClick={(e) => {
                     e.preventDefault();
-                    setShowSizeContext(!showSizeContext);
+                    handleClickSetting(settings.size);
                 }}
                 title="Size"
             >
@@ -43,39 +42,13 @@ export default function SizeButton({
                     }}
                 ></div>
             </div>
-            <div
-                className="dialog"
-                style={{ display: showSizeContext ? "block" : "none" }}
-            >
-                <div>
-                    <label htmlFor="lineWidth">Size</label>
-                    <span>{currentSize}px</span>
-                </div>
-                <div>
-                    <input
-                        style={{ width: "100%" }}
-                        id="lineWidth"
-                        value={currentSize}
-                        min={
-                            mode === tool.Paint
-                                ? MIN_BRUSH_SIZE
-                                : MIN_ERASER_SIZE
-                        }
-                        max={
-                            mode === tool.Paint
-                                ? MAX_BRUSH_SIZE
-                                : MAX_ERASER_SIZE
-                        }
-                        step={STEP_BRUSH}
-                        onChange={(e) =>
-                            handleChangeSize(parseFloat(e.target.value))
-                        }
-                        type="range"
-                        aria-label="pincel line width"
-                        title="line width"
-                    />
-                </div>
-            </div>
+            {showSizeMenu && (
+                <SizeMenu
+                    currentSize={currentSize}
+                    handleChangeSize={handleChangeSize}
+                    mode={mode}
+                />
+            )}
         </div>
     );
 }

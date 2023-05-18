@@ -6,8 +6,9 @@ import OpacityButton from "./OpacityButton";
 import Eraser from "./Eraser";
 import Paint from "./Paint";
 import { tool } from "../types/tool";
+import { settings } from "../types/settings";
 
-type MainToolbarProps = {
+type ToolbarProps = {
     mode: tool;
     opacity: number;
     color: string;
@@ -18,7 +19,7 @@ type MainToolbarProps = {
     handleColorChange: (color: string) => void;
     handleSizeChange: (lineWidth: number) => void;
 };
-export default function MainToolbar({
+export default function Toolbar({
     opacity,
     mode,
     color,
@@ -28,26 +29,30 @@ export default function MainToolbar({
     handleSizeChange,
     handleColorChange,
     handleChangeOpacity,
-}: MainToolbarProps) {
-    const [showOpacityContext, setShowOpacityContext] =
-        useState<boolean>(false);
-    const [showSizeContext, setShowSizeContext] = useState<boolean>(false);
+}: ToolbarProps) {
+    const [showOpacityMenu, setShowOpacityMenu] = useState<boolean>(false);
+    const [showSizeMenu, setShowSizeMenu] = useState<boolean>(false);
 
     useEffect(() => {
         if (drawing) {
-            setShowOpacityContext(false);
-            setShowSizeContext(false);
+            hideMenu();
         }
     }, [drawing]);
 
-    const handleShowSizeContext = (show: boolean) => {
-        setShowSizeContext(show);
-        setShowOpacityContext(false);
+    
+    const hideMenu = () => {
+        setShowOpacityMenu(false);
+        setShowSizeMenu(false);
     };
-
-    const handleOpacityContext = (show: boolean) => {
-        setShowOpacityContext(show);
-        setShowSizeContext(false);
+    
+    const handleClickSetting = (v: settings) => {
+        hideMenu();
+        if (v === settings.opacity) {
+            setShowOpacityMenu(true);
+        }
+        if (v === settings.size) {
+            setShowSizeMenu(true);
+        }
     };
 
     return (
@@ -71,18 +76,18 @@ export default function MainToolbar({
             <div>
                 <SizeButton
                     mode={mode}
-                    showSizeContext={showSizeContext}
-                    handleShowSizeContext={handleShowSizeContext}
+                    showMenu={showSizeMenu}
+                    handleClickSetting={handleClickSetting}
                     currentSize={size}
                     handleChangeSize={handleSizeChange}
                 />
             </div>
             <div>
                 <OpacityButton
-                    showOpacityContext={showOpacityContext}
-                    handleOpacityChange={handleChangeOpacity}
-                    handleOpacityContext={handleOpacityContext}
                     opacity={opacity}
+                    showMenu={showOpacityMenu}
+                    handleOpacityChange={handleChangeOpacity}
+                    handleClickSetting={handleClickSetting}
                 />
             </div>
         </div>

@@ -40,7 +40,7 @@ button {
     transform: translate(-50%, -50%);
 }
 
-.dialog {
+.menu {
     border-radius: 5px;
     padding: 8px;
     width: 200px;
@@ -53,14 +53,14 @@ button {
     color: white;
     flex-direction: column;
 }
-.dialog label{
+.menu label{
     color: white;
 }
-.dialog :first-child {
+.menu :first-child {
     display: flex;
     justify-content: space-between;
 }
-.dialog div {
+.menu div {
     padding: 8px;
 }
 .brush-tool,
