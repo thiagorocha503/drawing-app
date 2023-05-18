@@ -30,7 +30,7 @@ export default function OpacityButton({
                     style={{
                         height: "60%",
                         width: "60%",
-                        backgroundColor: "grey",
+                        backgroundColor: "black",
                         opacity: opacity / 100,
                     }}
                 ></div>

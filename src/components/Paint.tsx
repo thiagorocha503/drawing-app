@@ -8,8 +8,8 @@ export default function Pencil({
     return (
         <button title="Paint (B)"  type="button" className="brush-tool" onClick={() => onClick()}>
             <svg
-                width={30}
-                fill={active ? "black" : "grey"}
+                width={32} height={32}
+                fill={active ? "#c4c4c4" : "#5f5f5f"}
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
             >

@@ -68,7 +68,7 @@ export default function MainToolbar({
             <div>
                 <ColorPicker color={color} onClick={handleColorChange} />
             </div>
-            <div style={{ paddingBottom: "8px" }}>
+            <div>
                 <SizeButton
                     mode={mode}
                     showSizeContext={showSizeContext}

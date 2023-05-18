@@ -26,11 +26,11 @@ button {
 
 .outter-circle {
     position: relative;
-    height: 40px;
-    width: 40px;
-    background-color: transparent;
+    height: 32px;
+    width: 32px;
+    background-color: #555555;
     cursor: pointer;
-    border: 2px solid #4f4f4f;
+    /* border: 2px solid #555555; */
 }
 
 .inner-circle {
@@ -38,7 +38,6 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #202020;
 }
 
 .dialog {
@@ -49,9 +48,13 @@ button {
     position: absolute;
     top: 0;
     left: calc(100% + 30px);
-    background-color: #d4d4d4;
+    background-color: #373737;
     display: flex;
+    color: white;
     flex-direction: column;
+}
+.dialog label{
+    color: white;
 }
 .dialog :first-child {
     display: flex;
@@ -64,8 +67,7 @@ button {
 .eraser-tool {
     border: none;
     background-color: transparent;
-    width: 40px;
-    height: 40px;
+
 }
 
 .redo,
