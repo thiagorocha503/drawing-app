@@ -1,4 +1,4 @@
-export enum brushMode {
+export enum tool {
     Paint,
     Eraser,
 }

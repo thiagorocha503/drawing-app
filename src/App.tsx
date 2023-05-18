@@ -3,7 +3,7 @@ import { useState } from "react";
 import Canvas from "./components/Canvas";
 import MainToolbar from "./components/Toolbar";
 import Palettebar from "./components/PaletteBar";
-import { brushMode } from "./types/toolMode";
+import { tool } from "./types/tool";
 import Clean from "./components/Clean";
 import Undo from "./components/Undo";
 import Redo from "./components/Redo";
@@ -11,14 +11,17 @@ import { Shapes, LineDraw } from "./types/shapes";
 import Download from "./components/Download";
 import {
     MAX_BRUSH_SIZE,
+    MAX_ERASER_SIZE,
     MIN_BRUSH_SIZE,
+    MIN_ERASER_SIZE,
     NUMBER_KEY_TIME_RESET,
 } from "./constants/input";
 
 function App() {
     const [opacity, setOpacity] = useState<number>(100);
-    const [mode, setMode] = useState<brushMode>(brushMode.Paint);
-    const [size, setSize] = useState<number>(10);
+    const [mode, setMode] = useState<tool>(tool.Paint);
+    const [brushSize, setBrushSize] = useState<number>(1);
+    const [eraserSize, setEraserSize] = useState<number>(10);
     const [color, setColor] = useState<string>("#000000");
     const [drawing, setDrawing] = useState<boolean>(false);
     const canvasRef: RefObject<HTMLCanvasElement> =
@@ -48,7 +51,7 @@ function App() {
         }
         if (opacity === 100) {
             setOpacity(100);
-        }      
+        }
         const func = () => {
             setKeyNumberPressed([null, null, null]);
             setTimeoutId(null);
@@ -59,8 +62,7 @@ function App() {
         }
     }, [keyNumberPressed, timeoutId]);
 
-
-    // Shortcuts 
+    // Shortcuts
     useEffect(() => {
         const handleKeyPress = (ev: KeyboardEvent) => {
             const key = ev.key;
@@ -68,21 +70,39 @@ function App() {
             const shiftPressed = ev.shiftKey;
             // paint
             if (key === "B" || key === "b") {
-                setMode(brushMode.Paint);
+                setMode(tool.Paint);
             }
             // erase
             if (key === "E" || key === "e") {
-                setMode(brushMode.Eraser);
+                setMode(tool.Eraser);
             }
             // brush size
             if (key === "[") {
-                if (size - 1 >= MIN_BRUSH_SIZE) {
-                    setSize((s) => s - 1);
+                if (
+                    mode === tool.Paint &&
+                    brushSize - 1 >= MIN_BRUSH_SIZE
+                ) {
+                    setBrushSize((s) => s - 1);
+                }
+                if (
+                    mode === tool.Eraser &&
+                    brushSize - 1 >= MIN_ERASER_SIZE
+                ) {
+                    setEraserSize((s) => s - 1);
                 }
             }
             if (key === "]") {
-                if (size + 1 <= MAX_BRUSH_SIZE) {
-                    setSize((s) => s + 1);
+                if (
+                    mode === tool.Paint &&
+                    brushSize + 1 <= MAX_BRUSH_SIZE
+                ) {
+                    setBrushSize((s) => s + 1);
+                }
+                if (
+                    mode === tool.Eraser &&
+                    brushSize + 1 <= MAX_ERASER_SIZE
+                ) {
+                    setEraserSize((e) => e + 1);
                 }
             }
             // undo
@@ -98,8 +118,8 @@ function App() {
                 ev.preventDefault();
                 downloadRef.current?.click();
             }
-            if(key === "Delete"){
-                handleClear()
+            if (key === "Delete") {
+                handleClear();
             }
             // opacity
             if (key.match(/^[0-9]$/)) {
@@ -121,7 +141,13 @@ function App() {
     };
 
     const handleLineWidthChange = (line: number) => {
-        setSize(line);
+        console.log(line);
+        if (mode === tool.Paint) {
+            setBrushSize(line);
+        }
+        if (mode === tool.Eraser) {
+            setEraserSize(line);
+        }
     };
 
     const handleDrawing = (value: boolean) => {
@@ -140,7 +166,7 @@ function App() {
         setOpacity(value);
     };
 
-    const handleChangeMode = (mode: brushMode) => {
+    const handleChangeMode = (mode: tool) => {
         setMode(mode);
     };
     const handleUndo = () => {
@@ -206,10 +232,9 @@ function App() {
                 opacity={opacity}
                 drawing={drawing}
                 color={color}
-                size={size}
+                size={mode === tool.Paint ? brushSize : eraserSize}
                 handleChangeMode={handleChangeMode}
                 handleChangeOpacity={handleChangeOpacity}
-                handleClear={handleClear}
                 handleColorChange={handleChangeColor}
                 handleSizeChange={handleLineWidthChange}
             />
@@ -224,7 +249,7 @@ function App() {
                 drawing={drawing}
                 handleDrawing={handleDrawing}
                 color={color}
-                lineWidth={size}
+                lineWidth={mode === tool.Paint ? brushSize : eraserSize}
             />
             <Palettebar color={color} handleColorChange={handleChangeColor} />
             <Redo

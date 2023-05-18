@@ -9,13 +9,13 @@ import {
 import { rgbToDec } from "../util/convertion";
 import { Position } from "../types/position";
 import "./Canvas.css";
-import { brushMode } from "../types/toolMode";
+import { tool } from "../types/tool";
 import { LineDraw, LineStyle, Shapes } from "../types/shapes";
 
 type CanvasProps = {
     currentHistory: number;
     histories: Shapes[];
-    mode: brushMode;
+    mode: tool;
     opacity: number;
     drawing: boolean;
     color: string;
@@ -48,12 +48,12 @@ export default function Canvas({
     const handleMouseDown = (evt: MouseEvent) => {
         const canvas = offScreenRef.current as HTMLCanvasElement;
 
-        if (mode === brushMode.Paint || mode === brushMode.Eraser) {
+        if (mode === tool.Paint || mode === tool.Eraser) {
             const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
             ctx?.beginPath();
             const { red, green, blue } = rgbToDec(color);
             ctx.strokeStyle =
-                mode === brushMode.Paint
+                mode === tool.Paint
                     ? `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`
                     : "white";
             ctx.lineCap = lineCap;
@@ -80,7 +80,7 @@ export default function Canvas({
             return;
         }
         clean();
-        if (mode === brushMode.Paint || mode === brushMode.Eraser) {
+        if (mode === tool.Paint || mode === tool.Eraser) {
             const { x, y } = currentPosition(evt);
             ctx.lineTo(x, y);
             ctx.stroke();
@@ -95,7 +95,7 @@ export default function Canvas({
         const { red, green, blue } = rgbToDec(color);
         ctx.beginPath();
         ctx.strokeStyle =
-            mode === brushMode.Paint
+            mode === tool.Paint
                 ? `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`
                 : "white";
         ctx.lineCap = lineCap;
@@ -123,7 +123,7 @@ export default function Canvas({
             return;
         }
         let new_shapes: Shapes | null = null;
-        if (mode === brushMode.Paint || mode === brushMode.Eraser) {
+        if (mode === tool.Paint || mode === tool.Eraser) {
             // draw line
             drawLine(paperRef.current?.getContext("2d")!);
             // shapes history
@@ -133,7 +133,7 @@ export default function Canvas({
                 lineJoin: "round",
                 lineWidth: lineWidth,
                 strokeColor:
-                    mode === brushMode.Paint
+                    mode === tool.Paint
                         ? `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`
                         : "white",
             };

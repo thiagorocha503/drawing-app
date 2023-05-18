@@ -5,19 +5,18 @@ import "./Toolbar.css";
 import OpacityButton from "./OpacityButton";
 import Eraser from "./Eraser";
 import Paint from "./Paint";
-import { brushMode } from "../types/toolMode";
+import { tool } from "../types/tool";
 
 type MainToolbarProps = {
-    mode: brushMode;
+    mode: tool;
     opacity: number;
     color: string;
     size: number;
     drawing: boolean;
-    handleChangeMode: (mode: brushMode) => void;
+    handleChangeMode: (mode: tool) => void;
     handleChangeOpacity: (value: number) => void;
     handleColorChange: (color: string) => void;
     handleSizeChange: (lineWidth: number) => void;
-    handleClear: () => void;
 };
 export default function MainToolbar({
     opacity,
@@ -29,7 +28,6 @@ export default function MainToolbar({
     handleSizeChange,
     handleColorChange,
     handleChangeOpacity,
-    handleClear,
 }: MainToolbarProps) {
     const [showOpacityContext, setShowOpacityContext] =
         useState<boolean>(false);
@@ -56,35 +54,30 @@ export default function MainToolbar({
         <div className={`tool ${drawing ? "tool-out" : "tool-in"}`}>
             <div>
                 <Paint
-                    active={mode === brushMode.Paint}
-                    onClick={() => handleChangeMode(brushMode.Paint)}
+                    active={mode === tool.Paint}
+                    onClick={() => handleChangeMode(tool.Paint)}
                 />
             </div>
             <div>
                 <Eraser
-                    active={mode === brushMode.Eraser}
-                    onClick={() => handleChangeMode(brushMode.Eraser)}
+                    active={mode === tool.Eraser}
+                    onClick={() => handleChangeMode(tool.Eraser)}
                 />
             </div>
 
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    paddingBottom: "8px",
-                }}
-            >
+            <div>
                 <ColorPicker color={color} onClick={handleColorChange} />
             </div>
             <div style={{ paddingBottom: "8px" }}>
                 <SizeButton
+                    mode={mode}
                     showSizeContext={showSizeContext}
                     handleShowSizeContext={handleShowSizeContext}
                     currentSize={size}
                     handleChangeSize={handleSizeChange}
                 />
             </div>
-            <div style={{ paddingBottom: "8px" }}>
+            <div>
                 <OpacityButton
                     showOpacityContext={showOpacityContext}
                     handleOpacityChange={handleChangeOpacity}

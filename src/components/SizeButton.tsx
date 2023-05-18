@@ -1,18 +1,29 @@
-import { MAX_BRUSH_SIZE, MIN_BRUSH_SIZE, STEP_BRUSH } from "../constants/input";
+import {
+    MAX_BRUSH_SIZE,
+    MAX_ERASER_SIZE,
+    MIN_BRUSH_SIZE,
+    MIN_ERASER_SIZE,
+    STEP_BRUSH,
+} from "../constants/input";
+import { tool } from "../types/tool";
 
 type SizeButtonProps = {
+    mode: tool;
     currentSize: number;
     showSizeContext: boolean;
     handleShowSizeContext: (show: boolean) => void;
     handleChangeSize: (value: number) => void;
 };
 export default function SizeButton({
+    mode,
     showSizeContext,
     currentSize,
     handleChangeSize,
     handleShowSizeContext: setShowSizeContext,
 }: SizeButtonProps) {
-    const w = (100 * currentSize) / MAX_BRUSH_SIZE;
+    const w =
+        (85 * currentSize) /
+        (mode === tool.Paint ? MAX_BRUSH_SIZE : MAX_ERASER_SIZE);
     return (
         <div style={{ position: "relative" }}>
             <div
@@ -21,7 +32,6 @@ export default function SizeButton({
                     e.preventDefault();
                     setShowSizeContext(!showSizeContext);
                 }}
-                style={{ border: "2px solid #4f4f4f" }}
                 title="Size"
             >
                 <div
@@ -29,7 +39,7 @@ export default function SizeButton({
                     style={{
                         width: `${w}%`,
                         height: `${w}%`,
-                        background: "background-color: #202020",
+                        border: "3px solid #202020",
                     }}
                 ></div>
             </div>
@@ -46,8 +56,16 @@ export default function SizeButton({
                         style={{ width: "100%" }}
                         id="lineWidth"
                         value={currentSize}
-                        min={MIN_BRUSH_SIZE}
-                        max={MAX_BRUSH_SIZE}
+                        min={
+                            mode === tool.Paint
+                                ? MIN_BRUSH_SIZE
+                                : MIN_ERASER_SIZE
+                        }
+                        max={
+                            mode === tool.Paint
+                                ? MAX_BRUSH_SIZE
+                                : MAX_ERASER_SIZE
+                        }
                         step={STEP_BRUSH}
                         onChange={(e) =>
                             handleChangeSize(parseFloat(e.target.value))
