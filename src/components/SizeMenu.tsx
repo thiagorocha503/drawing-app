@@ -20,7 +20,7 @@ export default function SizeMenu({
         <div
             className="menu"
         >
-            <div>
+            <div style={{display:"flex", justifyContent:"space-between", paddingBottom: "8px"}}>
                 <label htmlFor="lineWidth">Size</label>
                 <span>{currentSize}px</span>
             </div>

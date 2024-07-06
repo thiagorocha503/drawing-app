@@ -1,13 +1,14 @@
 import { useState } from "react";
-import "./Download.css";
 import { RefObject } from "react";
 import { Shapes } from "../types/shapes";
-
+import "./Download.css"
 export default function Download({
+    drawing,
     canvas,
     histories,
     downloadRef: ref,
 }: {
+    drawing: boolean
     canvas: HTMLCanvasElement | null;
     histories: Shapes[];
     downloadRef: RefObject<HTMLAnchorElement>;
@@ -18,10 +19,11 @@ export default function Download({
             ref={ref}
             title="Download (Ctrl+S)"
             href={canvas?.toDataURL("image/png")}
-            className={`download  ${histories.length > 0 ? "show" : "hide"}`}
+            className={`download  ${histories.length > 0 && !drawing ? "show" : "hide"}`}
             onMouseOut={() => setColor("grey")}
             onMouseOver={() => setColor("black")}
             download={"canvas.png"}
+           
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

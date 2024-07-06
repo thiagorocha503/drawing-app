@@ -9,7 +9,7 @@ type OpacityButtonProps = {
 };
 export default function OpacityButton({
     opacity,
-    showMenu: showOpacityMenu,
+    showMenu,
     handleOpacityChange,
     handleClickSetting,
 }: OpacityButtonProps) {
@@ -35,7 +35,7 @@ export default function OpacityButton({
                     }}
                 ></div>
             </div>
-            {showOpacityMenu && (
+            {showMenu && (
                 <OpacityMenu
                     handleOpacityChange={handleOpacityChange}
                     opacity={opacity}

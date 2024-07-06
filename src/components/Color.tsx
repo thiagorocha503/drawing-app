@@ -1,18 +1,49 @@
-import "./Color.css";
+import { useRef } from "react";
+import { settings } from "../types/settings";
 
-export default function Color({
-    color,
-    onClick,
-}: {
+type ColorPickerProps = {
+    handleClickSetting: (v: settings) => void;
+    showMenu: boolean;
     color: string;
-    onClick: (color: string) => void;
-}) {
+    handleColorChange: (color: string) => void;
+};
+export default function Color({
+    handleClickSetting,
+    handleColorChange,
+    color,
+}: ColorPickerProps) {
+    const picker = useRef<HTMLInputElement>(null);
     return (
-        <button
-            className="color"
-            type="button"
-            style={{ backgroundColor: color, display: "block" }}
-            onClick={() => onClick(color)}
-        ></button>
+        <div style={{ position: "relative" }}>
+            <div
+                title="Color"
+                onClick={() => {
+                    handleClickSetting(settings.color);
+                    picker.current!.click();
+                }}
+            >
+                <div
+                    className="outter-circle"
+                    style={{
+                        backgroundColor: color,
+                        border: "3px solid #555555",
+                       
+                    }}
+                ></div>
+            </div>
+            <input
+                onChange={(e) => handleColorChange(e.target.value)}
+                value={color}
+                ref={picker}
+                type="color"
+                style={{
+                    position:"absolute",
+                    top:-30,
+                    left:60,                  
+                    visibility:"hidden",
+                }}
+            />
+        </div>
     );
+
 }

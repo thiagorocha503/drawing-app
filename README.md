@@ -39,3 +39,8 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
+
+
+### Referencia
+https://www.youtube.com/watch?v=h4sIKiyEo6k
+https://www.youtube.com/watch?v=HnRHrAfqW4g

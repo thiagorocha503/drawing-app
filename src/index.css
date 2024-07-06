@@ -30,7 +30,6 @@ button {
     width: 32px;
     background-color: #555555;
     cursor: pointer;
-    /* border: 2px solid #555555; */
 }
 
 .inner-circle {
@@ -42,32 +41,45 @@ button {
 
 .menu {
     border-radius: 5px;
-    padding: 8px;
-    width: 200px;
-    height: 90px;
+    padding: 16px;
+    min-width: 200px;
+    min-height: 90px;
     position: absolute;
-    top: 0;
     left: calc(100% + 30px);
     background-color: #373737;
     display: flex;
     color: white;
     flex-direction: column;
 }
-.menu label{
+.menu label {
     color: white;
 }
-.menu :first-child {
-    display: flex;
-    justify-content: space-between;
-}
-.menu div {
-    padding: 8px;
-}
+
 .brush-tool,
 .eraser-tool {
     border: none;
     background-color: transparent;
+}
 
+input[type="range"] {
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: grey;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid grey;
 }
 
 .redo,

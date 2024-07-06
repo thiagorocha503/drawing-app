@@ -15,7 +15,7 @@ type SizeButtonProps = {
 };
 export default function SizeButton({
     mode,
-    showMenu: showSizeMenu,
+    showMenu,
     currentSize,
     handleChangeSize,
     handleClickSetting,
@@ -42,7 +42,7 @@ export default function SizeButton({
                     }}
                 ></div>
             </div>
-            {showSizeMenu && (
+            {showMenu && (
                 <SizeMenu
                     currentSize={currentSize}
                     handleChangeSize={handleChangeSize}

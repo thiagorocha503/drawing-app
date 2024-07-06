@@ -6,11 +6,11 @@ import {
     Dispatch,
     SetStateAction,
 } from "react";
-import { rgbToDec } from "../util/convertion";
 import { Position } from "../types/position";
 import "./Canvas.css";
 import { tool } from "../types/tool";
 import { LineDraw, LineStyle, Shapes } from "../types/shapes";
+import { Color } from "../types/Color";
 
 type CanvasProps = {
     currentHistory: number;
@@ -51,7 +51,7 @@ export default function Canvas({
         if (mode === tool.Paint || mode === tool.Eraser) {
             const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
             ctx?.beginPath();
-            const { red, green, blue } = rgbToDec(color);
+            const { red, green, blue } = Color.toDec(color);
             ctx.strokeStyle =
                 mode === tool.Paint
                     ? `rgba(${red}, ${green}, ${blue}, ${opacity / 100})`
@@ -92,7 +92,7 @@ export default function Canvas({
         if (paths.length === 1) {
             return;
         }
-        const { red, green, blue } = rgbToDec(color);
+        const { red, green, blue } = Color.toDec(color);
         ctx.beginPath();
         ctx.strokeStyle =
             mode === tool.Paint
@@ -127,7 +127,7 @@ export default function Canvas({
             // draw line
             drawLine(paperRef.current?.getContext("2d")!);
             // shapes history
-            const { red, green, blue } = rgbToDec(color);
+            const { red, green, blue } = Color.toDec(color);
             const style: LineStyle = {
                 lineCap: "round",
                 lineJoin: "round",

@@ -2,7 +2,6 @@ import { RefObject, useEffect, useRef } from "react";
 import { useState } from "react";
 import Canvas from "./components/Canvas";
 import Toolbar from "./components/Toolbar";
-import Palettebar from "./components/PaletteBar";
 import { tool } from "./types/tool";
 import Clean from "./components/Clean";
 import Undo from "./components/Undo";
@@ -24,6 +23,7 @@ function App() {
     const [eraserSize, setEraserSize] = useState<number>(10);
     const [color, setColor] = useState<string>("#000000");
     const [drawing, setDrawing] = useState<boolean>(false);
+    const [showMenu, setShowTool] = useState(true);
     const canvasRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
     const downloadRef: RefObject<HTMLAnchorElement> =
@@ -68,6 +68,7 @@ function App() {
             const key = ev.key;
             const ctrlPressed = ev.ctrlKey;
             const shiftPressed = ev.shiftKey;
+            const altPressed = ev.altKey;
             // paint
             if (key === "B" || key === "b") {
                 setMode(tool.Paint);
@@ -78,30 +79,18 @@ function App() {
             }
             // brush size
             if (key === "[") {
-                if (
-                    mode === tool.Paint &&
-                    brushSize - 1 >= MIN_BRUSH_SIZE
-                ) {
+                if (mode === tool.Paint && brushSize - 1 >= MIN_BRUSH_SIZE) {
                     setBrushSize((s) => s - 1);
                 }
-                if (
-                    mode === tool.Eraser &&
-                    brushSize - 1 >= MIN_ERASER_SIZE
-                ) {
+                if (mode === tool.Eraser && brushSize - 1 >= MIN_ERASER_SIZE) {
                     setEraserSize((s) => s - 1);
                 }
             }
             if (key === "]") {
-                if (
-                    mode === tool.Paint &&
-                    brushSize + 1 <= MAX_BRUSH_SIZE
-                ) {
+                if (mode === tool.Paint && brushSize + 1 <= MAX_BRUSH_SIZE) {
                     setBrushSize((s) => s + 1);
                 }
-                if (
-                    mode === tool.Eraser &&
-                    brushSize + 1 <= MAX_ERASER_SIZE
-                ) {
+                if (mode === tool.Eraser && brushSize + 1 <= MAX_ERASER_SIZE) {
                     setEraserSize((e) => e + 1);
                 }
             }
@@ -129,6 +118,11 @@ function App() {
                     keys.push(key);
                     return keys;
                 });
+            }
+            // hide/ show tool
+            if ((key === "J" || key === "j") && altPressed && ctrlPressed) {
+                console.log("> hide: ");
+                setShowTool((e) => !e);
             }
         };
         window.addEventListener("keydown", handleKeyPress);
@@ -227,6 +221,7 @@ function App() {
                 onClick={handleClear}
             />
             <Toolbar
+                showMenu={showMenu}
                 mode={mode}
                 opacity={opacity}
                 drawing={drawing}
@@ -250,7 +245,6 @@ function App() {
                 color={color}
                 lineWidth={mode === tool.Paint ? brushSize : eraserSize}
             />
-            <Palettebar color={color} handleColorChange={handleChangeColor} />
             <Redo
                 handleRedo={handleRedo}
                 currentHistory={currentHistory}
@@ -258,6 +252,7 @@ function App() {
                 histories={histories}
             />
             <Download
+                drawing={drawing}
                 downloadRef={downloadRef}
                 canvas={canvasRef.current}
                 histories={histories}

@@ -7,7 +7,13 @@ export default function OpacityMenu({
 }) {
     return (
         <div className="menu">
-            <div>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingBottom: "8px",
+                }}
+            >
                 <label htmlFor="opacity">Opacity</label>
                 <span>{opacity}%</span>
             </div>

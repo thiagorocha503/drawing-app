@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import SizeButton from "./SizeButton";
-import ColorPicker from "./ColorPicker";
 import "./Toolbar.css";
 import OpacityButton from "./OpacityButton";
 import Eraser from "./Eraser";
 import Paint from "./Paint";
 import { tool } from "../types/tool";
 import { settings } from "../types/settings";
+import Color from "./Color";
 
 type ToolbarProps = {
     mode: tool;
@@ -14,6 +14,7 @@ type ToolbarProps = {
     color: string;
     size: number;
     drawing: boolean;
+    showMenu: boolean;
     handleChangeMode: (mode: tool) => void;
     handleChangeOpacity: (value: number) => void;
     handleColorChange: (color: string) => void;
@@ -25,6 +26,7 @@ export default function Toolbar({
     color,
     size,
     drawing,
+    showMenu: show,
     handleChangeMode,
     handleSizeChange,
     handleColorChange,
@@ -32,6 +34,7 @@ export default function Toolbar({
 }: ToolbarProps) {
     const [showOpacityMenu, setShowOpacityMenu] = useState<boolean>(false);
     const [showSizeMenu, setShowSizeMenu] = useState<boolean>(false);
+    const [showColorMenu, setShowColorMenu] = useState<boolean>(false);
 
     useEffect(() => {
         if (drawing) {
@@ -39,39 +42,54 @@ export default function Toolbar({
         }
     }, [drawing]);
 
-    
     const hideMenu = () => {
         setShowOpacityMenu(false);
         setShowSizeMenu(false);
+        setShowColorMenu(false);
     };
-    
+
     const handleClickSetting = (v: settings) => {
         hideMenu();
         if (v === settings.opacity) {
-            setShowOpacityMenu(true);
+            setShowOpacityMenu((e) => !showOpacityMenu);
         }
         if (v === settings.size) {
-            setShowSizeMenu(true);
+            setShowSizeMenu((e) => !showSizeMenu);
+        }
+        if (v === settings.color) {
+            console.log(v);
+            setShowColorMenu((e) => !showColorMenu);
         }
     };
 
     return (
-        <div className={`tool ${drawing ? "tool-out" : "tool-in"}`}>
+        <div className={`tool ${drawing || !show ? "tool-out" : "tool-in"}`}>
             <div>
                 <Paint
                     active={mode === tool.Paint}
-                    onClick={() => handleChangeMode(tool.Paint)}
+                    onClick={() => {
+                        handleChangeMode(tool.Paint);
+                        hideMenu();
+                    }}
                 />
             </div>
             <div>
                 <Eraser
                     active={mode === tool.Eraser}
-                    onClick={() => handleChangeMode(tool.Eraser)}
+                    onClick={() => {
+                        handleChangeMode(tool.Eraser);
+                        hideMenu();
+                    }}
                 />
             </div>
 
             <div>
-                <ColorPicker color={color} onClick={handleColorChange} />
+                <Color
+                    handleColorChange={handleColorChange}
+                    color={color}
+                    showMenu={showColorMenu}
+                    handleClickSetting={handleClickSetting}
+                />
             </div>
             <div>
                 <SizeButton
