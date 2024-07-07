@@ -14,7 +14,7 @@ import {
     MIN_BRUSH_SIZE,
     MIN_ERASER_SIZE,
     NUMBER_KEY_TIME_RESET,
-} from "./constants/input";
+} from "./constants";
 
 function App() {
     const [opacity, setOpacity] = useState<number>(100);

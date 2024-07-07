@@ -1,7 +1,7 @@
 import {
     MAX_BRUSH_SIZE,
     MAX_ERASER_SIZE,
-} from "../constants/input";
+} from "../constants";
 import { settings } from "../types/settings";
 import { tool } from "../types/tool";
 import SizeMenu from "./SizeMenu";

@@ -4,7 +4,7 @@ import {
     MIN_BRUSH_SIZE,
     MIN_ERASER_SIZE,
     STEP_BRUSH,
-} from "../constants/input";
+} from "../constants";
 import { tool } from "../types/tool";
 
 export default function SizeMenu({
