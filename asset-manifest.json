@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/drawing-app/static/css/main.f2cea60d.css",
-    "main.js": "/drawing-app/static/js/main.9c449dc2.js",
-    "static/js/787.f342a3d8.chunk.js": "/drawing-app/static/js/787.f342a3d8.chunk.js",
+    "main.css": "/drawing-app/static/css/main.bb705fab.css",
+    "main.js": "/drawing-app/static/js/main.fd91aeeb.js",
+    "static/js/453.bf8538f3.chunk.js": "/drawing-app/static/js/453.bf8538f3.chunk.js",
     "index.html": "/drawing-app/index.html",
-    "main.f2cea60d.css.map": "/drawing-app/static/css/main.f2cea60d.css.map",
-    "main.9c449dc2.js.map": "/drawing-app/static/js/main.9c449dc2.js.map",
-    "787.f342a3d8.chunk.js.map": "/drawing-app/static/js/787.f342a3d8.chunk.js.map"
+    "main.bb705fab.css.map": "/drawing-app/static/css/main.bb705fab.css.map",
+    "main.fd91aeeb.js.map": "/drawing-app/static/js/main.fd91aeeb.js.map",
+    "453.bf8538f3.chunk.js.map": "/drawing-app/static/js/453.bf8538f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2cea60d.css",
-    "static/js/main.9c449dc2.js"
+    "static/css/main.bb705fab.css",
+    "static/js/main.fd91aeeb.js"
   ]
 }
