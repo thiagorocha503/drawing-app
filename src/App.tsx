@@ -23,7 +23,6 @@ function App() {
     const [eraserSize, setEraserSize] = useState<number>(10);
     const [color, setColor] = useState<string>("#000000");
     const [drawing, setDrawing] = useState<boolean>(false);
-    const [showMenu, setShowTool] = useState(true);
     const canvasRef: RefObject<HTMLCanvasElement> =
         useRef<HTMLCanvasElement>(null);
     const downloadRef: RefObject<HTMLAnchorElement> =
@@ -35,6 +34,7 @@ function App() {
         null,
     ]);
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+    const [showTool, setShowTool] = useState(true);
 
     // Opacity Shortcuts
     useEffect(() => {
@@ -121,15 +121,15 @@ function App() {
             }
             // hide/ show tool
             if ((key === "J" || key === "j") && altPressed && ctrlPressed) {
-                console.log("> hide: ");
-                setShowTool((e) => !e);
+                setShowTool((v) => !v);
             }
         };
         window.addEventListener("keydown", handleKeyPress);
         return () => {
             window.removeEventListener("keydown", handleKeyPress);
         };
-    });
+    },);
+
     const handleChangeColor = (color: string) => {
         setColor(color);
     };
@@ -221,7 +221,7 @@ function App() {
                 onClick={handleClear}
             />
             <Toolbar
-                showMenu={showMenu}
+                visible={showTool}
                 mode={mode}
                 opacity={opacity}
                 drawing={drawing}

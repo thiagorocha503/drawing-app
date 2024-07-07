@@ -14,7 +14,7 @@ type ToolbarProps = {
     color: string;
     size: number;
     drawing: boolean;
-    showMenu: boolean;
+    visible: boolean;
     handleChangeMode: (mode: tool) => void;
     handleChangeOpacity: (value: number) => void;
     handleColorChange: (color: string) => void;
@@ -24,9 +24,9 @@ export default function Toolbar({
     opacity,
     mode,
     color,
+    visible,
     size,
     drawing,
-    showMenu: show,
     handleChangeMode,
     handleSizeChange,
     handleColorChange,
@@ -35,6 +35,7 @@ export default function Toolbar({
     const [showOpacityMenu, setShowOpacityMenu] = useState<boolean>(false);
     const [showSizeMenu, setShowSizeMenu] = useState<boolean>(false);
     const [showColorMenu, setShowColorMenu] = useState<boolean>(false);
+
 
     useEffect(() => {
         if (drawing) {
@@ -63,7 +64,7 @@ export default function Toolbar({
     };
 
     return (
-        <div className={`tool ${drawing || !show ? "tool-out" : "tool-in"}`}>
+        <div className={`tool ${drawing || !visible ? "tool-out" : "tool-in"}`}>
             <div>
                 <Paint
                     active={mode === tool.Paint}
